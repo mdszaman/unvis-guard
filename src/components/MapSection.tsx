@@ -54,11 +54,11 @@ export default function MapSection() {
             type: "Feature",
             geometry: {
               type: "LineString",
-              coordinates: cameraPoints.map((c) => c.position as [number, number]),
+              coordinates: cameraPoints.map((c) => c.position),
             },
             properties: {},
           },
-        } as any);
+        });
 
         map.addLayer({
           id: "camera-path-layer",

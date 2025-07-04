@@ -24,7 +24,7 @@ export default function TopBar() {
             <Button
               color="inherit"
               endIcon={<span style={{ fontSize: '0.7rem' }}>▼</span>}
-              onClick={(e) => {
+              onClick={() => {
                 const menu = document.getElementById('language-menu');
                 if (menu) {
                   menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
