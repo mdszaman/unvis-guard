@@ -1,27 +1,27 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Timeline from "./Timeline";
 import { useEffect, useRef } from "react";
+import maplibregl, { Map } from "maplibre-gl";
 
 const cameraIconPath = "/images/camera-icon.png";
 
 const cameraPoints = [
-    { label: "Camera 1", position: [90.3982, 23.7510] },
-    { label: "Camera 2", position: [90.4082, 23.7510] },
-    { label: "Camera 3", position: [90.3982, 23.7610] },
-    { label: "Camera 4", position: [90.3882, 23.7510] },
+  { label: "Camera 1", position: [90.3982, 23.7510] },
+  { label: "Camera 2", position: [90.4082, 23.7510] },
+  { label: "Camera 3", position: [90.3982, 23.7610] },
+  { label: "Camera 4", position: [90.3882, 23.7510] },
 ] as const;
 
 export default function MapSection() {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<any>(null);
+  const mapRef = useRef<Map | null>(null);
 
   useEffect(() => {
     if (!mapContainer.current || mapRef.current) return;
 
     (async () => {
-      const maplibregl: any = await import("maplibre-gl");
       const map = new maplibregl.Map({
         container: mapContainer.current as HTMLElement,
         style: "https://api.maptiler.com/maps/hybrid/style.json?key=6uH8bAZlGb2Uq2CQjMAQ",
@@ -31,7 +31,7 @@ export default function MapSection() {
 
       mapRef.current = map;
 
-      map.addControl(new maplibregl.NavigationControl());
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false, showZoom: false }));
 
       map.on("load", () => {
         setTimeout(() => map.resize(), 100);
